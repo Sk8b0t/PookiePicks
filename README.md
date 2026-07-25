@@ -21,3 +21,10 @@ A fast, self-contained movie recommendation engine deployed with Flask, Pandas, 
   ### ⚡ Performance Highlights
 * **Zero External APIs:** Runs completely self-contained without rate limits or API key dependencies.
 * **Low Memory Footprint:** Uses precision-optimized NumPy matrix files to handle thousands of similarity vectors on minimal RAM.
+### 🎯 Step-by-Step Breakdown
+
+1. **Data Cleaning & Tag Extraction:** Extracted genres, keywords, top cast, and director from the dataset, combining them into a unified `tags` string for each movie.
+2. **Text Normalization (NLTK):** Applied stemming using `nltk.stem.porter.PorterStemmer` to convert words to their root forms (e.g., `"actions"` $\rightarrow$ `"action"`).
+3. **Feature Extraction:** Converted text tags into numeric feature vectors using `CountVectorizer`.
+4. **Similarity Computation:** Generated a pairwise Cosine Similarity matrix using Scikit-Learn to evaluate relative movie proximity.
+5. **Memory-Mapped Inference:** Saved the similarity matrix as a `.npy` file to enable low-RAM, lightning-fast row lookups inside the Flask app.
