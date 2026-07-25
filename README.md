@@ -14,3 +14,8 @@ A fast, self-contained movie recommendation engine deployed with Flask, Pandas, 
 ### **Frontend & User Interface**
 * ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) **HTML5 / Jinja2** – Templating engine for rendering dynamic search results.
 * ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) **CSS3** – Custom responsive styling.
+
+
+  ### ⚡ Performance Highlights
+* **Zero External APIs:** Runs completely self-contained without rate limits or API key dependencies.
+* **Low Memory Footprint:** Uses precision-optimized NumPy matrix files to handle thousands of similarity vectors on minimal RAM.
