@@ -23,8 +23,38 @@ A fast, self-contained movie recommendation engine deployed with Flask, Pandas, 
 * **Low Memory Footprint:** Uses precision-optimized NumPy matrix files to handle thousands of similarity vectors on minimal RAM.
 ### 🎯 Step-by-Step Breakdown
 
+
 1. **Data Cleaning & Tag Extraction:** Extracted genres, keywords, top cast, and director from the dataset, combining them into a unified `tags` string for each movie.
 2. **Text Normalization (NLTK):** Applied stemming using `nltk.stem.porter.PorterStemmer` to convert words to their root forms (e.g., `"actions"` $\rightarrow$ `"action"`).
 3. **Feature Extraction:** Converted text tags into numeric feature vectors using `CountVectorizer`.
 4. **Similarity Computation:** Generated a pairwise Cosine Similarity matrix using Scikit-Learn to evaluate relative movie proximity.
 5. **Memory-Mapped Inference:** Saved the similarity matrix as a `.npy` file to enable low-RAM, lightning-fast row lookups inside the Flask app.
+
+## 🔄 Project Workflow
+
+[ Raw Movie Data (TMDB) ]
+│
+▼
+[ Text Preprocessing ] ─── (Combine Overview, Genres, Keywords, Cast & Crew)
+│
+▼
+[ NLP Processing ] ─────── (Tokenization & PorterStemmer via NLTK)
+│
+▼
+[ Vectorization ] ──────── (CountVectorizer / Bag of Words)
+│
+▼
+[ Cosine Similarity ] ──── (5000x5000 Matrix Calculation)
+│
+▼
+[ Optimization ] ───────── (Cast to float32 & save as NumPy .npy file)
+│
+▼
+┌─────────────────────────────────────────────────────────┐
+│                      Flask App                          │
+│                                                         │
+│  1. User selects movie via searchable HTML5 datalist   │
+│  2. App loads row vector instantly via NumPy memory-map  │
+│  3. Ranks top 5 most similar movies                     │
+│  4. Renders recommendations dynamically on web UI       │
+└─────────────────────────────────────────────────────────┘
