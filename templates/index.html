@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstraFlix</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 { text-align: center; color: #00adb5; }
+        form { display: flex; gap: 10px; margin-bottom: 30px; }
+        
+        /* Style for the searchable input field */
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            background: #222831;
+            color: #fff;
+            border: 1px solid #393e46;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #00adb5;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #00adb5;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover { background: #00888e; }
+        ul { list-style: none; padding: 0; }
+        li {
+            background: #222831;
+            margin: 8px 0;
+            padding: 12px 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .score { color: #00adb5; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>🎬 Movie Recommender</h1>
+
+    <form method="POST" action="/">
+        <!-- Searchable text input linked to datalist -->
+        <input 
+            type="text" 
+            name="movie" 
+            list="movie-options" 
+            placeholder="Type or select a movie..." 
+            value="{{ selected_movie if selected_movie else '' }}"
+            required
+            autocomplete="off"
+        >
+        
+        <!-- Autocomplete suggestions list -->
+        <datalist id="movie-options">
+            {% for movie in movie_list %}
+                <option value="{{ movie }}">
+            {% endfor %}
+        </datalist>
+
+        <button type="submit">Recommend</button>
+    </form>
+
+    {% if recommendations %}
+        <h3>Top Recommendations for "{{ selected_movie }}":</h3>
+        <ul>
+            {% for item in recommendations %}
+                <li>
+                    <span>{{ loop.index }}. {{ item.title }}</span>
+                    <span class="score">{{ item.score }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>
