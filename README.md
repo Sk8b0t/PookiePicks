@@ -32,29 +32,17 @@ A fast, self-contained movie recommendation engine deployed with Flask, Pandas, 
 
 ## 🔄 Project Workflow
 
-[ Raw Movie Data (TMDB) ]
-│
-▼
-[ Text Preprocessing ] ─── (Combine Overview, Genres, Keywords, Cast & Crew)
-│
-▼
-[ NLP Processing ] ─────── (Tokenization & PorterStemmer via NLTK)
-│
-▼
-[ Vectorization ] ──────── (CountVectorizer / Bag of Words)
-│
-▼
-[ Cosine Similarity ] ──── (5000x5000 Matrix Calculation)
-│
-▼
-[ Optimization ] ───────── (Cast to float32 & save as NumPy .npy file)
-│
-▼
-┌─────────────────────────────────────────────────────────┐
-│                      Flask App                          │
-│                                                         │
-│  1. User selects movie via searchable HTML5 datalist   │
-│  2. App loads row vector instantly via NumPy memory-map  │
-│  3. Ranks top 5 most similar movies                     │
-│  4. Renders recommendations dynamically on web UI       │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[Raw Movie Data TMDB] --> B[Text Preprocessing]
+    B -->|Combine Overview, Genres, Cast & Crew| C[NLP Processing]
+    C -->|Stemming via NLTK PorterStemmer| D[Vectorization]
+    D -->|CountVectorizer / Bag of Words| E[Cosine Similarity]
+    E -->|5000x5000 Matrix Calculation| F[Optimization]
+    F -->|Cast to float32 & save as .npy| G[Flask Web Application]
+
+    subgraph Flask Web Application
+        G1[User selects movie via HTML5 datalist] --> G2[App loads vector via NumPy mmap]
+        G2 --> G3[Ranks top 5 similar movies]
+        G3 --> G4[Renders recommendations on UI]
+    end
