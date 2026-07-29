@@ -5,7 +5,6 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Load pickled files
 movies_data = pickle.load(open('movies.pkl', 'rb'))
 similarity = np.load(open('similarity.npy', 'rb'))
 
@@ -15,11 +14,10 @@ else:
     movies = movies_data
 
 def get_recommendations(movie_title):
-    # Case-insensitive check to match exact title from dataframe
     matched_movies = movies[movies['title'].str.lower() == movie_title.strip().lower()]
     
     if matched_movies.empty:
-        return None  # Movie not found
+        return None 
     
     movie_index = matched_movies.index[0]
     distances = similarity[movie_index]
