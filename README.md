@@ -1,6 +1,7 @@
 # PookiePicks
 A fast, self-contained movie recommendation engine deployed with Flask, Pandas, and Scikit-Learn. Uses memory-mapped vector similarity to deliver instant recommendations without external API dependencies.
 Live Link: https://pookie-picks.vercel.app/
+
 Blog: https://medium.com/@sayanbiswas0812/building-pookie-picks-a-memory-efficient-content-based-movie-recommender-799094f92b8a?sharedUserId=sayanbiswas0812
 
 ## 🛠️ Tech Stack
