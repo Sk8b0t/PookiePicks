@@ -27,7 +27,7 @@ def get_recommendations(movie_title):
     recommended_movies = []
     for i in movies_list:
         title = movies.iloc[i[0]].title
-        score = f"{i[1] * 100:.1f}%"
+        score = f"{i[1] * 100:.2f}%"
         recommended_movies.append({'title': title, 'score': score})
         
     return recommended_movies
